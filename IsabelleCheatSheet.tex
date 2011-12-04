@@ -1,0 +1,52 @@
+\documentclass{article}
+\title{Semantics Cheat Sheet}
+\author{Thomas Pieronczyk}
+
+\begin{document}
+\maketitle
+\section{Semantics Summary}
+\subsection{Proof Methods}
+\begin{itemize}
+	\item [\textbf{induction}] performs structural induction on some variable (if the type of the variable is a datatype).
+	\item [\textbf{auto}] solves as many subgoals as it can, mainly by simplification (symbolic evaluation). "=" is used only from left to right.
+	\item [\textbf{sorry}] Completes any proof. Allows Top-Down Development (Assume lemma first and proof it later).
+	\item [\textbf{defer}] Takes the first subgoal and puts it to the end of the other subgoals.
+	\item [\textbf{value}] Yields results of given function or term.
+\end{itemize}
+
+\subsection{Simplifications}
+
+\begin{itemize}
+	\item \textbf{apply(auto split: ...)}
+	\item \textbf{apply(auto intro: ...)}
+	\item \textbf{apply(auto split: ...)}
+	\item \textbf{apply(auto split: split\_if\_asm)} Splits the if assumptions in the subgoals.
+	\item \textbf{apply(rule ...)} Applies a rule, which is defined by an inductive predicate.
+	\item \textbf{apply(rule ... [where "\textless\textgreater"])} Applies an inductive rule and a substitution of the state. The universal quantifier is replaced with the specific state. In this case all variables are set to zero.
+	\item \textbf{apply assumption} 
+\end{itemize}
+
+\subsection{General scheme}
+\begin{verbatim}
+lemma name: "..."
+apply(...)
+apply(...)
+apply(...)
+
+...
+
+done
+
+\end{verbatim}
+
+\subsection{Use lemma as simplification rule}
+\begin{verbatim}
+lemma name[simp]: "..."
+\end{verbatim}
+
+\subsection {Hints for isabella and proof general}
+\begin{itemize}
+	\item C-c C-f finds all theorems (or find\_theorems "\_ \~ \_").
+\end{itemize}
+
+\end{document}
