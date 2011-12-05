@@ -1,4 +1,5 @@
 \documentclass{article}
+\usepackage{amsmath}
 \title{Semantics Cheat Sheet}
 \author{Thomas Pieronczyk}
 
@@ -18,12 +19,13 @@
 
 \begin{itemize}
 	\item \textbf{apply(auto split: ...)}
+	\item \textbf{apply(auto split: mydatatype.split)} If you want to prove a predicate for a certain datatype \texttt{mydatatype}, this will create all the single instances for this datatype that have to be proven to prove the overall thing.
 	\item \textbf{apply(auto intro: ...)}
 	\item \textbf{apply(auto split: ...)}
 	\item \textbf{apply(auto split: split\_if\_asm)} Splits the if assumptions in the subgoals.
-	\item \textbf{apply(rule ...)} Applies a rule, which is defined by an inductive predicate.
+	\item \textbf{apply(rule ...)} Applies a rule, which is defined by an inductive predicate. That is, it matches the goal with something and replaces it by some (hopefully easier) premises.
 	\item \textbf{apply(rule ... [where "\textless\textgreater"])} Applies an inductive rule and a substitution of the state. The universal quantifier is replaced with the specific state. In this case all variables are set to zero.
-	\item \textbf{apply assumption} 
+	\item \textbf{apply assumption} Scans the assumptions for something that looks like the conclusion. Useful in a situation
 \end{itemize}
 
 \subsection{General scheme}
@@ -40,13 +42,17 @@ done
 \end{verbatim}
 
 \subsection{Use lemma as simplification rule}
-\begin{verbatim}
-lemma name[simp]: "..."
-\end{verbatim}
+
+\texttt{lemma mylemma[simp]: "..."} adds \texttt{mylemma} to the standard rules used for simplification. Simplification done ``from left to right''.
+
+\texttt{apply (auto simp add: thelemma)} let's you use \texttt{thelemma} as simplification rule.
 
 \subsection {Hints for isabella and proof general}
 \begin{itemize}
 	\item C-c C-f finds all theorems (or find\_theorems "\_ \~ \_").
+        \item C-c C-n makes next proof step
+        \item C-c C-u goes back in proof history (or at least tries to do)
+        \item C-c C-p shows the current proof state
 \end{itemize}
 
 \end{document}
