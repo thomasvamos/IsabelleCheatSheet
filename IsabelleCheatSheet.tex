@@ -5,18 +5,21 @@
 
 \begin{document}
 \maketitle
-\section{Semantics Summary}
+\section{Isabelle Cheat Sheet}
 \subsection{Proof Methods}
 \begin{itemize}
 	\item [\textbf{induction}] performs structural induction on some variable (if the type of the variable is a datatype).
 	\item [\textbf{auto}] solves as many subgoals as it can, mainly by simplification (symbolic evaluation). "=" is used only from left to right.
 	\item [\textbf{sorry}] Completes any proof. Allows Top-Down Development (Assume lemma first and proof it later).
 	\item [\textbf{defer}] Takes the first subgoal and puts it to the end of the other subgoals.
-	\item [\textbf{value}] Yields results of given function or term.
+\end{itemize}
+\subsection{Show infos}
+\begin{itemize}
+	\item \textbf{value} Yields results of given function or term.
+	\item \textbf{thm \textless theorem\textgreater} Writes the definition of "`theorem"' to the lower buffer.
 \end{itemize}
 
-\subsection{Simplifications}
-
+\subsection{Induction and Simplification}
 \begin{itemize}
 	\item \textbf{apply(auto split: ...)}
 	\item \textbf{apply(auto split: mydatatype.split)} If you want to prove a predicate for a certain datatype \texttt{mydatatype}, this will create all the single instances for this datatype that have to be proven to prove the overall thing.
@@ -38,7 +41,6 @@ apply(...)
 ...
 
 done
-
 \end{verbatim}
 
 \subsection{Use lemma as simplification rule}
@@ -54,5 +56,31 @@ done
         \item C-c C-u goes back in proof history (or at least tries to do)
         \item C-c C-p shows the current proof state
 \end{itemize}
+
+
+\section{Semantics Summary}
+\subsection{Recursive function definition}
+\begin{itemize}
+	\item Pattern-maching over datatype constructors
+	\item Order of equations matters
+	\item Termination must be provable automatically by size measures
+	\item Proves customized induction schema
+	\item \textbf{primrec} is a restrictive version of \textbf{fun}
+\end{itemize}
+\subsection{Induction and simplification}
+\begin{itemize}
+	\item Theorems about recursive functions are proved by induction.
+	\item Induction on argument number \textit{i} of \textit{f} if \textit{f} is defined by recursion on argument number \textit{i}.
+	\item Replace constants by variables
+	\item Generalize free variables by \textit{arbitrary} in induction proof (or by universal quantifier in formula).
+\end{itemize}
+
+\subsection{Tomeks Questions}
+\begin{itemize}
+	\item [S85] Explain "In each induction step, 1 constructor is added" and "In each recursive call, 1 constructor is removed."
+	\item [S87] Explain "Properties of \textit{f} are best proved by rule \textit{f.induct}"
+\end{itemize}
+
+\section {Isar}
 
 \end{document}
